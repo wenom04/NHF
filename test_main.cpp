@@ -8,7 +8,7 @@
 #include "Genericteam.h"
 #include "functions.h"
 
-int main(){
+int main() {
     Club club("Fitt Sportegyesulet");
 
     std::cout << club.getName() << std::endl;
@@ -45,31 +45,21 @@ int main(){
 
     std::cin >> n;
 
-    switch(n){
-        case 1234:
-        std::cout << "Elerheto: Csapatok kilistazasa" << std::endl;
-            list = true;
-            isRunning = true;
-        break;
-        case 5678:
-            std::cout << "Elerheto: Csapatok kilistazasa es csapat hozzaadasa" << std::endl;
-            list = true;
-            add = true;
-            isRunning = true;
-        break;
+    switch (n) {
         case 4321:
-            std::cout << "Elerheto: Csapatok kilistazasa, csapat hozzaadasa es csapat torlese"<< std::endl;
-            list = true;
-            add = true;
             remove = true;
+        case 5678:
+            add = true;
+        case 1234:
+            list = true;
             isRunning = true;
-        break;
+            break;
         default:
             std::cout << "Az adatokhoz valo hozzaferes megtagadva!" << std::endl;
-        break;
+            break;
     }
 
-    while(isRunning){
+    while (isRunning) {
         printOutMenu();
 
         std::cin >> k;
@@ -78,89 +68,89 @@ int main(){
         std::string teamname;
         std::string removeteam;
         std::string modifyteam;
-        
-        switch(k){
-            case 1:
-                if(list)
-                club.listTeams();
-            break;
-            case 2:
-                if(add){
-                std::cout << "A csapat neve: " << std::endl;
-                std::cin >> std::ws; //https://cplusplus.com/forum/beginner/25265/
-                std::getline(std::cin, teamname);
-                std::cout << "A csapat alapletszama: " << std::endl;
-                std::cin >> teamnumber;
 
-                genteam = new GenericTeam(teamname, teamnumber);
-                club.addTeam(genteam);
-                }
-                else
+        switch (k) {
+            case 1:
+                if (list)
+                    club.listTeams();
+                break;
+            case 2:
+                if (add) {
+                    std::cout << "A csapat neve: " << std::endl;
+                    std::cin >> std::ws; //https://cplusplus.com/forum/beginner/25265/
+                    std::getline(std::cin, teamname);
+                    std::cout << "A csapat alapletszama: " << std::endl;
+                    std::cin >> teamnumber;
+
+                    genteam = new GenericTeam(teamname, teamnumber);
+                    club.addTeam(genteam);
+                } else
                     std::cout << "Ezzel a jelszoval nem tud csapatot hozzaadni" << std::endl;
-            break;
+                break;
             case 3:
-                if(remove){
-                std::cout << "Melyik csapatot szeretne torolni?" << std::endl;
-                club.listTeams();
-                std::cin >> removeteam;
-                club.removeTeam(removeteam);
-                }
-                else
+                if (remove) {
+                    std::cout << "Melyik csapatot szeretne torolni?" << std::endl;
+                    club.listTeams();
+                    std::cin >> std::ws;
+                    std::getline(std::cin, removeteam);
+                    club.removeTeam(removeteam);
+                } else
                     std::cout << "Ezzel a jelszoval nem tud csapatot torolni" << std::endl;
-            break;
+                break;
             case 4:
                 std::cout << "Melyik csapat adatait szeretne modositani" << std::endl;
                 club.listTeams();
                 std::cin >> std::ws;
                 std::getline(std::cin, modifyteam);
                 isModifying = true;
-            break;
+                break;
             case 5:
                 isRunning = false;
-            break;
+                break;
             default:
                 std::cout << "Nem helyes szam!" << std::endl;
         }
         int firstfootball[11];
         int firsthandball[7];
         int firstbasketball[5];
-        if(isModifying){
+        if (isModifying) {
             printOutModifying();
             std::cin >> m;
-            switch(m){
+            switch (m) {
                 case 1:
-                    if(club.getTeamByName(modifyteam)->sportName() == "football"){
+                    if (club.getTeamByName(modifyteam)->sportName() == "football") {
                         std::cout << "Irjon ide 11 db szamot" << std::endl;
-                        for(int i = 0; i < 11; i++){
+                        for (int i = 0; i < 11; i++) {
                             std::cin >> firstfootball[i];
                         }
                         football->setFirst11(firstfootball);
-                        
+                        football->printFirstEleven();
                     }
 
-                    if(club.getTeamByName(modifyteam)->sportName() == "handball"){
+                    if (club.getTeamByName(modifyteam)->sportName() == "handball") {
                         std::cout << "Irjon ide 7 db szamot" << std::endl;
-                        for(int i = 0; i <  7; i++){
+                        for (int i = 0; i < 7; i++) {
                             std::cin >> firsthandball[i];
                         }
                         handball->setFirst7(firsthandball);
                     }
 
-                    if(club.getTeamByName(modifyteam)->sportName() == "basketball"){
+                    if (club.getTeamByName(modifyteam)->sportName() == "basketball") {
                         std::cout << "Irjon ide 5 db szamot" << std::endl;
-                        for(int i = 0; i < 5; i++){
+                        for (int i = 0; i < 5; i++) {
                             std::cin >> firstbasketball[i];
                         }
                         basketball->setFirst5(firstbasketball);
                     }
 
-                    if(club.getTeamByName(modifyteam)->sportName() == "generic"){
-                        std::cout << "Sajnos ezekhez a csapatokhoz meg nem lehet beallitani kezdocsapatot!" << std::endl;
+                    if (club.getTeamByName(modifyteam)->sportName() == "generic") {
+                        std::cout << "Sajnos ezekhez a csapatokhoz meg nem lehet beallitani kezdocsapatot!"
+                                  << std::endl;
                     }
                     isModifying = false;
-                break;
+                    break;
                 case 2:
-                    if(club.getTeamByName(modifyteam)->sportName() == "football"){
+                    if (club.getTeamByName(modifyteam)->sportName() == "football") {
                         std::cout << "A jatekos neve: " << std::endl;
                         std::cin >> std::ws;
                         std::getline(std::cin, name);
@@ -176,7 +166,7 @@ int main(){
                         football->addPlayer(player);
                     }
 
-                    if(club.getTeamByName(modifyteam)->sportName() == "handball"){
+                    if (club.getTeamByName(modifyteam)->sportName() == "handball") {
                         std::cout << "A jatekos neve: " << std::endl;
                         std::cin >> std::ws;
                         std::getline(std::cin, name);
@@ -192,7 +182,7 @@ int main(){
                         handball->addPlayer(player);
                     }
 
-                    if(club.getTeamByName(modifyteam)->sportName() == "basketball"){
+                    if (club.getTeamByName(modifyteam)->sportName() == "basketball") {
                         std::cout << "A jatekos neve: " << std::endl;
                         std::cin >> std::ws;
                         std::getline(std::cin, name);
@@ -208,8 +198,8 @@ int main(){
                         basketball->addPlayer(player);
                     }
 
-                    if(club.getTeamByName(modifyteam)->sportName() == "generic"){
-                        if(genteam == nullptr)
+                    if (club.getTeamByName(modifyteam)->sportName() == "generic") {
+                        if (genteam == nullptr)
                             std::cout << "Gond van ocsi" << std::endl;
                         std::cout << "A jatekos neve: " << std::endl;
                         std::cin >> std::ws;
@@ -226,23 +216,23 @@ int main(){
                         genteam->addPlayer(player);
                     }
                     isModifying = false;
-                break;
+                    break;
                 case 3:
                     std::cout << "Irjon be egy mezszamot" << std::endl;
                     std::cin >> removenumber;
-                    if(club.getTeamByName(modifyteam)->sportName() == "football")
+                    if (club.getTeamByName(modifyteam)->sportName() == "football")
                         football->removePlayer(removenumber);
-                    if(club.getTeamByName(modifyteam)->sportName() == "handball")
+                    if (club.getTeamByName(modifyteam)->sportName() == "handball")
                         handball->removePlayer(removenumber);
-                    if(club.getTeamByName(modifyteam)->sportName() == "basketball")
+                    if (club.getTeamByName(modifyteam)->sportName() == "basketball")
                         basketball->removePlayer(removenumber);
-                    if(club.getTeamByName(modifyteam)->sportName() == "generic")
+                    if (club.getTeamByName(modifyteam)->sportName() == "generic")
                         genteam->removePlayer(removenumber);
                     isModifying = false;
-                break;
+                    break;
                 default:
-                std::cout << "Ervenytelen szam!" << std::endl;
-                break;
+                    std::cout << "Ervenytelen szam!" << std::endl;
+                    break;
             }
         }
     }

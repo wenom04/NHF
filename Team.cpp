@@ -4,6 +4,9 @@ Team::Team(std::string name, int numberOfPlayers){
     this->name = name;
     this->numberOfPlayers = numberOfPlayers;
     players = new Player*[numberOfPlayers];
+    for (int i = 0; i < numberOfPlayers; i++){
+        players[i] = nullptr;
+    }
 }
 
 int Team::getNumberOfPlayers(){
@@ -16,7 +19,7 @@ std::string Team::getName(){
 
 Player* Team::getPlayerByJerseyNumber(int jerseyNumber){
     for (int i = 0; i < numberOfPlayers; i++){
-        if(players[i]->getJerseyN() == jerseyNumber){
+        if(players[i] != nullptr && players[i]->getJerseyN() == jerseyNumber){
             return players[i];
         }
     }
@@ -32,9 +35,9 @@ void Team::setPlayersFreeAgentStatus(){
 }
 
 Team::~Team() {
-    //for (int i = 0; i < numberOfPlayers; i++) {
-        //if (players != nullptr)
-            //delete players[i];
-    //}
+    for (int i = 0; i < numberOfPlayers; i++) {
+        if (players != nullptr)
+            delete players[i];
+    }
     delete[] players;
 }

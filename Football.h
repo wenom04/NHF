@@ -12,6 +12,8 @@ public:
     Football(std::string name, int numberOfPlayers, std::string coach, std::string assistantCoach);
     
     void printTeamData();
+    
+    void printFirstEleven();
 
     void addPlayer(Player *player);
 

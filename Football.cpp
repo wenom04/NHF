@@ -17,6 +17,13 @@ void Football::printTeamData() {
     std::cout << std::endl;
 }
 
+void Football::printFirstEleven() {
+    std::cout << "Első 11:" << std::endl;
+    for (int i = 0; i < 11; i++) {
+        first11[i]->printData();
+    }
+}
+
 void Football::addPlayer(Player* player){
     Player** temp = new Player*[numberOfPlayers+1];
     for (int i = 0; i < numberOfPlayers; i++){
@@ -62,4 +69,8 @@ void Football::setFirst11(int* jerseyNumbers){
 
 std::string Football::sportName(){
     return "football";
+}
+
+Football::~Football() {
+    delete[] first11;
 }

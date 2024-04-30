@@ -9,17 +9,17 @@ class Basketball : public Team {
 public:
     Basketball(std::string name, int numberOfPlayers, int pomPonGirlsNumber);
     
-    void printTeamData();
+    void printTeamData() override;
     
-    void addPlayer(Player *player);
+    void addPlayer(Player *player) override;
     
-    void removePlayer(int jerseyNumber);
+    void removePlayer(int jerseyNumber) override;
     
     void setFirst5(int *jerseyNumbers);
 
-    std::string sportName();
+    std::string sportName() override;
     
-    ~Basketball() override {};
+    ~Basketball() {};
 };
 
 #endif //SPORTEGYESULET_BASKETBALL_H

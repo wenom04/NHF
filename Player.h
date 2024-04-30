@@ -5,10 +5,10 @@
 
 class Player {
     std::string name;
-    int age;
-    int jerseyNumber;
-    int height;
-    int weight;
+    int age = 0;
+    int jerseyNumber = 0;
+    int height = 0;
+    int weight = 0;
     bool freeAgent = false;
 public:
     Player(std::string name, int age, int jerseyNumber, int height, int weight);
