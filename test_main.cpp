@@ -68,6 +68,7 @@ int main() {
         std::string teamname;
         std::string removeteam;
         std::string modifyteam;
+        std::string  sport;
 
         switch (k) {
             case 1:
@@ -81,8 +82,11 @@ int main() {
                     std::getline(std::cin, teamname);
                     std::cout << "A csapat alapletszama: " << std::endl;
                     std::cin >> teamnumber;
+                    std::cout << "A csapat sportaga: " << std::endl;
+                    std::cin >> std::ws;
+                    std::getline(std::cin, sport);
 
-                    genteam = new GenericTeam(teamname, teamnumber);
+                    genteam = new GenericTeam(teamname, teamnumber, sport);
                     club.addTeam(genteam);
                 } else
                     std::cout << "Ezzel a jelszoval nem tud csapatot hozzaadni" << std::endl;

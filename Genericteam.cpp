@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Genericteam.h"
 
-GenericTeam::GenericTeam(std::string name, int numberOfPlayers)
-    : Team(name, numberOfPlayers) {
+GenericTeam::GenericTeam(std::string name, int numberOfPlayers, std::string sport)
+    : Team(name, numberOfPlayers), sport(sport) {
 }
 
 void GenericTeam::printTeamData() {
